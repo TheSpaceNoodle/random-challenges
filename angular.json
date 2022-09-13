@@ -100,8 +100,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "random-challenges:build:production",
+            "firebaseProject": "random-challenges-41e46",
+            "firebaseHostingSite": "randomnoodlechallenges"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f083e011-db77-4aaa-825c-1e7ff4b135e4"
   }
 }

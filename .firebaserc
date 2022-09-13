@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "random-challenges-41e46": {
+      "hosting": {
+        "random-challenges": [
+          "randomnoodlechallenges"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "random-challenges-41e46"
+  }
+}
