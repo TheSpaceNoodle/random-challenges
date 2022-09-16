@@ -1,47 +1,62 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  ChallengesPageComponent,
-  HelloPageComponent,
-  LoginPageComponent,
-  NotFoundPageComponent,
-  SubmitChallengePageComponent,
-  UsefulLinksPageComponent,
-} from './pages';
+import { LoginPageComponent } from './pages';
 
 const routes: Routes = [
   {
     path: '',
-    component: HelloPageComponent,
+    loadChildren: () =>
+      import('./pages/hello-page/hello-page.module').then(
+        (m) => m.HelloPageModule
+      ),
   },
   {
     path: 'challenges',
-    component: ChallengesPageComponent,
+    loadChildren: () =>
+      import('./pages/challenges-page/challenges-page.module').then(
+        (m) => m.ChallengesPageModule
+      ),
   },
   {
     path: 'submit-challenge',
-    component: SubmitChallengePageComponent,
+    loadChildren: () =>
+      import('./pages/submit-challenge-page/submit-challenge-page.module').then(
+        (m) => m.SubmitChallengePageModule
+      ),
   },
   {
     path: 'learn',
-    component: UsefulLinksPageComponent,
+    loadChildren: () =>
+      import('./pages/useful-links-page/useful-links-page.module').then(
+        (m) => m.UsefulLinksPageModule
+      ),
   },
   {
     path: 'profile',
-    component: UsefulLinksPageComponent,
+    loadChildren: () =>
+      import('./pages/profile-page/profile-page.module').then(
+        (m) => m.ProfilePageModule
+      ),
   },
   {
     path: 'login',
-    component: LoginPageComponent,
+    loadChildren: () =>
+      import('./pages/login-page/login-page.module').then(
+        (m) => m.LoginPageModule
+      ),
   },
   {
     path: '**',
     title: '404',
-    component: NotFoundPageComponent,
+    loadChildren: () =>
+      import('./pages/not-found-page/not-found-page.module').then(
+        (m) => m.NotFoundPageModule
+      ),
   },
 ];
 
 @NgModule({
+  declarations: [LoginPageComponent],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })

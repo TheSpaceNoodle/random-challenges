@@ -9,12 +9,12 @@ import {
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -26,7 +26,7 @@ import { NavbarComponent } from './components';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
-    MatButtonModule,
+    ComponentsModule,
   ],
   providers: [ScreenTrackingService],
   bootstrap: [AppComponent],

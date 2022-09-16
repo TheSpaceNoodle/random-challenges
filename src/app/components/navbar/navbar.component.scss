@@ -36,6 +36,8 @@
   }
 
   #nav-links {
+    display: flex;
+    align-items: center;
     ul {
       list-style: none;
       display: -webkit-box;
@@ -45,6 +47,7 @@
       -webkit-box-pack: justify;
       -ms-flex-pack: justify;
       justify-content: space-between;
+      margin-right: 40px;
 
       li a {
         text-decoration: none;
