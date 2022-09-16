@@ -1,1 +1,21 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.text {
+  max-width: 670px;
+
+  h1 {
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 85px;
+  }
+
+  p {
+    font-size: 32px;
+    line-height: 37px;
+    margin-bottom: 85px;
+  }
+}

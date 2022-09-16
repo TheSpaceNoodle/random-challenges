@@ -18,12 +18,14 @@ $noodle-palette: (
 
 $noodle-theme-primary: mat.define-palette($noodle-palette, 600);
 $noodle-theme-accent: mat.define-palette($noodle-palette, 100);
+$noodle-theme-warn: mat.define-palette($noodle-palette, 200);
 
 $noodle-theme: mat.define-dark-theme(
   (
     color: (
       primary: $noodle-theme-primary,
       accent: $noodle-theme-accent,
+      warn: $noodle-theme-warn,
     ),
   )
 );
@@ -48,5 +50,10 @@ body {
 
 body {
   font-family: "League Spartan", sans-serif;
+  font-weight: 400;
   background-color: mat.get-color-from-palette($noodle-palette, 600);
+}
+
+.highlight {
+  color: #fff0b5;
 }

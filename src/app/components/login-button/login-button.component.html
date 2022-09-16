@@ -1,4 +1,8 @@
-<button mat-flat-button color="accent">
-  <span id="login-button">Login with</span>
+<button
+  mat-flat-button
+  color="{{ color }}"
+  ngClass="{{ color === 'warn' ? 'page' : null }}"
+>
+  <span id="login-button-text"><ng-content></ng-content></span>
   <img src="./assets/socials/github-black.svg" alt="github-login" />
 </button>

@@ -1,9 +1,13 @@
 <header>
-  <h1>Become a better developer</h1>
-  <p>
-    by doing some random challenges provided by other people or help others
-    submitting your own ideas!
-  </p>
-  <app-login-button routerLink="login"></app-login-button>
+  <div class="text">
+    <h1>Become a <span class="highlight">better developer</span></h1>
+    <p>
+      by doing some random challenges provided by other people or help others
+      <span class="highlight">submitting your own ideas</span>!
+    </p>
+    <app-login-button routerLink="login" [color]="'warn'"
+      >Login with GitHub</app-login-button
+    >
+  </div>
   <img src="/assets/NO-IDEA.svg" alt="" />
 </header>
