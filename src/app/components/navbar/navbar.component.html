@@ -1,1 +1,27 @@
-<p>navbar works!</p>
+<div
+  id="navbar"
+  [ngClass]="
+    scrolled == 1 ? 'fixed-hidden' : scrolled == 2 ? 'fixed-shown' : ''
+  "
+>
+  <div id="main-logo">
+    <a routerLink=""><img src="./assets/logo.png" alt="" /></a>
+  </div>
+
+  <div id="nav-links">
+    <ul>
+      <li>
+        <a routerLink="challenges">Challenges</a>
+      </li>
+      <li>
+        <a routerLink="submit-challenge">Submit Challenge</a>
+      </li>
+      <li>
+        <a routerLink="learn">Learning</a>
+      </li>
+    </ul>
+    <button mat-flat-button color="accent">
+      Login with <img src="src/assets/socials/GitHub.svg" alt="" />
+    </button>
+  </div>
+</div>

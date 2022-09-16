@@ -1,33 +1,52 @@
 @use "@angular/material" as mat;
+
 @include mat.core();
 
-$random-challenges-primary: mat.define-palette(mat.$indigo-palette);
-$random-challenges-accent: mat.define-palette(
-  mat.$pink-palette,
-  A200,
-  A100,
-  A400
+$noodle-palette: (
+  50: #fbfef0,
+  100: #fff0b5,
+  200: #ec97c0,
+  300: #e75a7c,
+  400: #e75a7c,
+  500: #909590,
+  600: #2c363f,
+  700: #000,
+  800: #000,
+  900: #000,
+  contrast: (),
 );
 
-$random-challenges-warn: mat.define-palette(mat.$red-palette);
+$noodle-theme-primary: mat.define-palette($noodle-palette, 600);
+$noodle-theme-accent: mat.define-palette($noodle-palette, 100);
 
-$random-challenges-theme: mat.define-light-theme(
+$noodle-theme: mat.define-dark-theme(
   (
     color: (
-      primary: $random-challenges-primary,
-      accent: $random-challenges-accent,
-      warn: $random-challenges-warn,
+      primary: $noodle-theme-primary,
+      accent: $noodle-theme-accent,
     ),
   )
 );
 
-@include mat.all-component-themes($random-challenges-theme);
+@include mat.all-component-themes($noodle-theme);
+
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=League+Spartan:wght@300;400;500;700&display=swap");
+
+*,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: mat.get-color-from-palette($noodle-palette, 50);
+}
 
 html,
 body {
   height: 100%;
 }
+
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "League Spartan", sans-serif;
+  background-color: mat.get-color-from-palette($noodle-palette, 600);
 }
