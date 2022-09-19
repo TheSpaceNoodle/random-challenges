@@ -71,6 +71,10 @@ body {
   background-color: mat.get-color-from-palette($noodle-palette, 600);
 }
 
+app-root {
+  overflow: hidden;
+}
+
 .highlight {
   color: #fff0b5;
 }

@@ -3,6 +3,7 @@ header {
   justify-content: space-around;
   align-items: center;
   min-height: 100vh;
+  margin: 0 auto 75px;
 }
 
 .text {
@@ -27,12 +28,22 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 1100px;
-  margin: 0 auto 20px;
+  margin: 0 auto 50px;
+  overflow: hidden;
+  opacity: 0;
 
   div {
     width: 280px;
     border: 1px solid #909590;
     background-color: #909590;
+  }
+
+  .divider-line-one {
+    transform: translate(-100%);
+  }
+
+  .divider-line-two {
+    transform: translate(100%);
   }
 
   h1 {
@@ -43,7 +54,7 @@ header {
 #purpose-section {
   width: 1100px;
   font-size: 32px;
-  margin: auto;
+  margin: 0 auto 150px;
 
   p {
     line-height: 37px;
@@ -57,6 +68,10 @@ header {
       color: #909590;
       margin-left: 10px;
     }
+
+    p {
+      opacity: 0;
+    }
   }
 
   .accept {
@@ -69,9 +84,9 @@ header {
 }
 
 footer {
-  height: 220px;
+  height: 300px;
   #contact-me {
-    margin-top: 50px;
+    margin-top: 100px;
     display: flex;
     justify-content: space-around;
 
@@ -117,4 +132,65 @@ footer {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(0, 50px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-rtl {
+  0% {
+    opacity: 0;
+    transform: translate(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes fade-ltr {
+  0% {
+    opacity: 0;
+    transform: translate(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+
+  .divider-line-one {
+    animation-name: fade-rtl;
+    animation-duration: 0.5s;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
+  }
+
+  .divider-line-two {
+    animation-name: fade-ltr;
+    animation-duration: 0.5s;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
+  }
+}
+
+.purpose .fade-in {
+  animation-delay: 0.85s;
+  animation-duration: 0.5s;
+  opacity: 1;
 }
