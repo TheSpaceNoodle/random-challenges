@@ -22,10 +22,8 @@ export class InViewportDirective implements AfterViewInit {
 
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log(entry.target.id);
         if (entry.intersectionRatio > 0 && entry.isIntersecting) {
           entry.target.classList.add('fade-in');
-          console.log('adding');
         }
       });
     }, options);

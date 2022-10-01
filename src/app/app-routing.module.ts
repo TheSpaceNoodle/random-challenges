@@ -12,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'challenges',
+    title: 'Challenges',
     loadChildren: () =>
       import('./pages/challenges-page/challenges-page.module').then(
         (m) => m.ChallengesPageModule
@@ -26,6 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'learn',
+    title: 'Useful links',
     loadChildren: () =>
       import('./pages/useful-links-page/useful-links-page.module').then(
         (m) => m.UsefulLinksPageModule
@@ -33,6 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    title: 'My Profile',
     loadChildren: () =>
       import('./pages/profile-page/profile-page.module').then(
         (m) => m.ProfilePageModule

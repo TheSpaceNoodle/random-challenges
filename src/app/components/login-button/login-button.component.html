@@ -2,6 +2,7 @@
   mat-flat-button
   color="{{ color }}"
   ngClass="{{ color === 'warn' ? 'page' : null }}"
+  (click)="authService.GitHubAuth()"
 >
   <span id="login-button-text"><ng-content></ng-content></span>
   <img src="./assets/socials/github-black.svg" alt="github-login" />

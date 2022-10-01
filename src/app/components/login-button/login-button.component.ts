@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-button',
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LoginButtonComponent implements OnInit {
   @Input() color = 'accent';
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
 }
