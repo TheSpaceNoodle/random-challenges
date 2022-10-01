@@ -20,10 +20,8 @@
         <a routerLink="learn">Learning</a>
       </li>
     </ul>
-    <app-login-button routerLink="login" *ngIf="noUser"
-      >Login with</app-login-button
-    >
-    <app-profile-button [photoUrl]="user.photo" *ngIf="user"
+    <app-login-button *ngIf="noUser">Login with</app-login-button>
+    <app-profile-button [photoUrl]="user.photo" *ngIf="!noUser"
       ><a routerLink="profile">Profile</a></app-profile-button
     >
   </div>
