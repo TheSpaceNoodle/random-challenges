@@ -5,6 +5,7 @@ import { LoginPageComponent } from './pages';
 const routes: Routes = [
   {
     path: '',
+    title: 'Random Challenges',
     loadChildren: () =>
       import('./pages/hello-page/hello-page.module').then(
         (m) => m.HelloPageModule

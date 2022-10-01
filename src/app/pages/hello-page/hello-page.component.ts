@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { getAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-hello-page',
@@ -7,8 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HelloPageComponent implements OnInit {
   @Input() visible!: boolean;
+  logged = false;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (getAuth().currentUser) {
+      this.logged = true;
+    }
+  }
 }

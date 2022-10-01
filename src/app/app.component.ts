@@ -9,7 +9,6 @@ import { User } from './models/user.model';
 })
 export class AppComponent {
   title = 'random-challenges';
-  userActive!: boolean;
   noUser!: boolean;
   loading = true;
   user: User = {
@@ -21,7 +20,6 @@ export class AppComponent {
   ngOnInit() {
     onAuthStateChanged(getAuth(), (user) => {
       if (user) {
-        this.userActive = true;
         this.noUser = false;
         this.user = {
           userName: user.displayName || '',
@@ -29,7 +27,6 @@ export class AppComponent {
           registrationDate: user.metadata.creationTime || '',
         };
       } else {
-        this.userActive = false;
         this.noUser = true;
       }
       this.loading = false;

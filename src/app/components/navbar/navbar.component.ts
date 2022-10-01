@@ -7,7 +7,6 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  @Input() userActive!: boolean;
   @Input() noUser!: boolean;
   @Input() user!: User;
   scrolled = 0;

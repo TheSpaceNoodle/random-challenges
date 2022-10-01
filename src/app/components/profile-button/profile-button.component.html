@@ -1,8 +1,10 @@
 <div id="profile">
-  <img src="{{ photoUrl }}" alt="" />
+  <div>
+    <img (click)="showMenu()" src="{{ photoUrl }}" alt="profile-image" />
+  </div>
 
-  <ul>
-    <li>Profile</li>
+  <ul [ngClass]="clicked ? 'show' : 'hide'">
+    <li><ng-content></ng-content></li>
     <li (click)="logOut()">LogOut</li>
   </ul>
 </div>

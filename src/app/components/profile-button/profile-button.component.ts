@@ -7,8 +7,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProfileButtonComponent implements OnInit {
   @Input() photoUrl = '';
+  clicked = false;
 
   constructor() {}
+
+  showMenu() {
+    this.clicked = !this.clicked;
+  }
+
+  log() {
+    console.log('works');
+  }
 
   logOut() {}
 

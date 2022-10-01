@@ -23,6 +23,8 @@
     <app-login-button routerLink="login" *ngIf="noUser"
       >Login with</app-login-button
     >
-    <app-profile-button [photoUrl]="user.photo"></app-profile-button>
+    <app-profile-button [photoUrl]="user.photo" *ngIf="user"
+      ><a routerLink="profile">Profile</a></app-profile-button
+    >
   </div>
 </div>

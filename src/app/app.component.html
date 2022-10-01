@@ -1,8 +1,7 @@
-<app-navbar
-  [user]="user"
-  [noUser]="noUser"
-  [userActive]="userActive"
-></app-navbar>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<app-loading *ngIf="loading"></app-loading>
+<ng-container *ngIf="!loading">
+  <app-navbar [user]="user" [noUser]="noUser"></app-navbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>

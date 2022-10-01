@@ -49,12 +49,12 @@
       -ms-flex-pack: justify;
       justify-content: space-between;
       margin-right: 40px;
-
-      li a {
-        text-decoration: none;
-      }
     }
   }
+}
+
+a {
+  text-decoration: none;
 }
 
 .fixed-hidden {
