@@ -5,7 +5,11 @@
 
   <ng-container>
     <div class="submit-box">
-      <form [formGroup]="challengeGroup" (ngSubmit)="onSubmit()">
+      <form
+        [formGroup]="challengeGroup"
+        (ngSubmit)="onSubmit()"
+        (change)="isGitHubUrl()"
+      >
         <input
           type="text"
           placeholder="Challenge name"
@@ -23,25 +27,28 @@
         <input
           type="text"
           placeholder="Estimated time to complete"
-          formControlName="completeTime"
+          formControlName="timeToComplete"
           autocomplete="off"
           required
         />
         <input
-          type="text"
-          placeholder="GitHub repo with completed project (optional)"
+          type="url"
+          placeholder="GitHub repo with starting files (any files you want)"
           formControlName="gitHub"
           autocomplete="off"
+          required
         />
         <textarea
           id="summary"
-          placeholder="Short project summary up to 200 sumbols"
+          placeholder="Short project summary up to 250 sumbols"
           formControlName="summary"
           maxlength="250"
           autocomplete="off"
           required
         ></textarea>
-        <button type="submit" [disabled]="!challengeGroup.valid">Submit</button>
+        <button type="submit" [disabled]="!valid">
+          {{ submited ? "Submited" : "Submit" }}
+        </button>
       </form>
     </div>
   </ng-container>

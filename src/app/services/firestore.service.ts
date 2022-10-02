@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { addDoc, collectionData, Firestore } from '@angular/fire/firestore';
+import { collection } from '@firebase/firestore';
+import { Challenge } from 'src/models/challenge.model';
 
 @Injectable({
   providedIn: 'root',
@@ -7,15 +9,16 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class FirestoreService {
   // private challenges!: CollectionReference<DocumentData>;
 
-  constructor(private readonly firestore: AngularFirestore) {
+  constructor(private readonly firestore: Firestore) {
     // this.challenges = collection(this.firestore, 'collections');
   }
 
   getChallenges() {
-    return this.firestore.collection('challenges');
+    return collectionData(collection(this.firestore, 'challenges'));
   }
 
-  // submitChallenge() {
-  //   setDoc(doc());
-  // }
+  submitChallenge(data: Challenge) {
+    addDoc(collection(this.firestore, 'challenges'), data);
+    return 'Added!';
+  }
 }
