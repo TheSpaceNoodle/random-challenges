@@ -1,1 +1,48 @@
-<p>submit-challenge-page works!</p>
+<div>
+  <ng-container *ngIf="noUser">
+    <p>Authorize first to proceed</p>
+  </ng-container>
+
+  <ng-container>
+    <div class="submit-box">
+      <form [formGroup]="challengeGroup" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          placeholder="Challenge name"
+          formControlName="challengeName"
+          autocomplete="off"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Prefered development stack"
+          formControlName="devStack"
+          autocomplete="off"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Estimated time to complete"
+          formControlName="completeTime"
+          autocomplete="off"
+          required
+        />
+        <input
+          type="text"
+          placeholder="GitHub repo with completed project (optional)"
+          formControlName="gitHub"
+          autocomplete="off"
+        />
+        <textarea
+          id="summary"
+          placeholder="Short project summary up to 200 sumbols"
+          formControlName="summary"
+          maxlength="250"
+          autocomplete="off"
+          required
+        ></textarea>
+        <button type="submit" [disabled]="!challengeGroup.valid">Submit</button>
+      </form>
+    </div>
+  </ng-container>
+</div>

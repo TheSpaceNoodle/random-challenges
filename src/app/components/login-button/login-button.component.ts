@@ -11,5 +11,9 @@ export class LoginButtonComponent implements OnInit {
 
   constructor(public authService: AuthService) {}
 
+  gitLogIn() {
+    this.authService.GitHubAuth();
+  }
+
   ngOnInit(): void {}
 }

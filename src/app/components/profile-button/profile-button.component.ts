@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile-button',
@@ -9,17 +10,15 @@ export class ProfileButtonComponent implements OnInit {
   @Input() photoUrl = '';
   clicked = false;
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   showMenu() {
     this.clicked = !this.clicked;
   }
 
-  log() {
-    console.log('works');
+  logOut() {
+    this.authService.logOut();
   }
-
-  logOut() {}
 
   ngOnInit(): void {}
 }
