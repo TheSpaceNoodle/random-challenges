@@ -10,7 +10,7 @@ import {
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
-import { Challenge } from 'src/models/challenge.model';
+import { Challenge } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root',

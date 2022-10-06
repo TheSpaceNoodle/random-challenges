@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginButtonComponent implements OnInit {
   @Input() color = 'accent';
 
-  constructor(public authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   gitLogIn() {
     this.authService.GitHubAuth();

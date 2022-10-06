@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Challenge } from 'src/app/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { Challenge } from 'src/models/challenge.model';
 
 @Component({
   selector: 'app-admin-page',

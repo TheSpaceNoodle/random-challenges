@@ -21,7 +21,7 @@
       </li>
     </ul>
     <app-login-button *ngIf="noUser">Login with</app-login-button>
-    <app-profile-button [photoUrl]="user.photo" *ngIf="!noUser"
+    <app-profile-button [photoUrl]="user.photo || ''" *ngIf="!noUser"
       ><a routerLink="profile">Profile</a></app-profile-button
     >
   </div>

@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { getAuth, signOut } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import * as auth from 'firebase/auth';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private fireAuth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private fireAuth: AngularFireAuth,
+    private router: Router,
+    private afs: AngularFirestore
+  ) {}
 
   GitHubAuth() {
-    console.log('github auth');
     return this.logIn(new auth.GithubAuthProvider());
   }
 
   logIn(provider: any) {
     return this.fireAuth.signInWithPopup(provider).then((result) => {
+      this.setUserData(result.user);
       this.router.navigate(['profile']);
     });
   }
@@ -29,5 +35,21 @@ export class AuthService {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  setUserData(user: any) {
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      userName: user.displayName,
+      photo: user.photoURL,
+      registrationDate: user.metadata.creationTime,
+      roles: {},
+    };
+    this.afs.doc(`user/${user.uid}`).set(userData);
+  }
+
+  getUser(uid: string) {
+    return this.afs.doc<User>(`user/${uid}`).valueChanges();
   }
 }
