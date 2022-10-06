@@ -44,6 +44,7 @@ export class SubmitChallengePageComponent implements OnInit {
       timeToComplete: this.challengeGroup.value.timeToComplete || '',
       gitHubURL: this.challengeGroup.value.gitHub || '',
       summary: this.challengeGroup.value.summary || '',
+      approved: false,
       submitedBy: this.uid,
     };
 

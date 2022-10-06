@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -43,10 +42,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'login',
+    path: 'admin',
     loadChildren: () =>
-      import('./pages/login-page/login-page.module').then(
-        (m) => m.LoginPageModule
+      import('./pages/admin-page/admin-page.module').then(
+        (m) => m.AdminPageModule
       ),
   },
   {
@@ -60,7 +59,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginPageComponent],
+  declarations: [],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })

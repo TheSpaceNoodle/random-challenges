@@ -1,0 +1,7 @@
+<div id="admin-page">
+  <div id="admin-page-container">
+    <div class="box" *ngFor="let challenge of challenges | async">
+      <p>{{ challenge.challengeName }}</p>
+    </div>
+  </div>
+</div>
