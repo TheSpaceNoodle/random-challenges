@@ -15,5 +15,12 @@ export class AdminPageComponent implements OnInit {
     this.challenges = firestoreService.getNotApprovedChallenges();
   }
 
+  approveChallenge(id: string) {
+    console.log(id);
+    if (id) {
+      this.firestoreService.approveChallenge(id);
+    }
+  }
+
   ngOnInit(): void {}
 }

@@ -1,1 +1,38 @@
-<p>card works!</p>
+<div class="box">
+  <div class="box-container">
+    <div class="heading">
+      <h1>{{ challenge.challengeName }}</h1>
+      <ng-content></ng-content>
+    </div>
+    <div class="box-content">
+      <div class="box-heading">
+        <div class="box-heading-group">
+          <div>
+            <img src="./assets/devStack.svg" alt="" />
+            <p>
+              {{ challenge.devStack }}
+            </p>
+          </div>
+          <div>
+            <img src="./assets/timeToComplete.svg" alt="" />
+            <p>
+              {{ challenge.timeToComplete }}
+            </p>
+          </div>
+        </div>
+        <a *ngIf="challenge.gitHubURL" href="{{ challenge.gitHubURL }}">
+          <img
+            class="github-link"
+            src="./assets/socials/github-yellow.svg"
+            alt=""
+          />
+        </a>
+      </div>
+      <p class="summary">{{ challenge.summary }}</p>
+      <div class="author">
+        <p>Author's DisplayName: {{ challenge.submitedBy.username }}</p>
+        <p>Author's uid: {{ challenge.submitedBy.uid }}</p>
+      </div>
+    </div>
+  </div>
+</div>

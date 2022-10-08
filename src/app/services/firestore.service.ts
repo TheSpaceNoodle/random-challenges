@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   addDoc,
   collectionData,
-  deleteDoc,
   doc,
   Firestore,
-  getDoc,
   setDoc,
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
@@ -19,7 +18,10 @@ export class FirestoreService {
   approvedRef = collection(this.firestore, 'approvedChallenges');
   notApprovedRef = collection(this.firestore, 'notApprovedChallenges');
 
-  constructor(private readonly firestore: Firestore) {}
+  constructor(
+    private readonly firestore: Firestore,
+    private readonly afs: AngularFirestore
+  ) {}
 
   getApprovedChallenges() {
     return collectionData(this.approvedRef) as Observable<Challenge[]>;
@@ -30,13 +32,21 @@ export class FirestoreService {
   }
 
   submitChallenge(data: Challenge) {
-    addDoc(this.notApprovedRef, data);
-    return 'Added!';
+    addDoc(this.notApprovedRef, data).then((result) => {
+      data.id = result.id;
+      setDoc(doc(this.notApprovedRef, result.id), data);
+    });
   }
 
   approveChallenge(id: string) {
-    const challenge = getDoc(doc(this.firestore, 'notApprovedChallenges', id));
-    deleteDoc(doc(this.firestore, 'notApprovedChallenges', id));
-    setDoc(doc(this.approvedRef, id), challenge);
+    this.afs
+      .doc<Challenge>(`notApprovedChallenges/${id}`)
+      .valueChanges()
+      .subscribe((data) => {
+        if (data) {
+          this.afs.doc<Challenge>(`approvedChallenges/${id}`).set(data);
+          this.afs.doc<Challenge>(`notApprovedChallenges/${id}`).delete();
+        }
+      });
   }
 }

@@ -5,7 +5,6 @@ import { CardComponent } from './card/card.component';
 import { LoadingComponent } from './loading/loading.component';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { ProfileButtonComponent } from './profile-button/profile-button.component';
-import { BoxComponent } from './box/box.component';
 
 @NgModule({
   imports: [CommonModule, MatButtonModule],
@@ -14,7 +13,6 @@ import { BoxComponent } from './box/box.component';
     CardComponent,
     ProfileButtonComponent,
     LoadingComponent,
-    BoxComponent,
   ],
   exports: [
     LoginButtonComponent,

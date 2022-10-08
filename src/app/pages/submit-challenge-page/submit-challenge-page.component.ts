@@ -35,17 +35,16 @@ export class SubmitChallengePageComponent implements OnInit {
     } else {
       this.valid = false;
     }
-    console.log('asdasd');
   }
 
   onSubmit() {
     const challenge = {
+      id: '',
       challengeName: this.challengeGroup.value.challengeName || '',
       devStack: this.challengeGroup.value.devStack || '',
       timeToComplete: this.challengeGroup.value.timeToComplete || '',
       gitHubURL: this.challengeGroup.value.gitHub || '',
       summary: this.challengeGroup.value.summary || '',
-      approved: false,
       submitedBy: {
         uid: this.uid,
         username: this.username,
@@ -61,7 +60,7 @@ export class SubmitChallengePageComponent implements OnInit {
       setTimeout(() => {
         this.submited = false;
       }, 2000);
-      this.challengeGroup.reset();
+      // this.challengeGroup.reset();
     }
   }
 

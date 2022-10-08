@@ -3,4 +3,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  #admin-page-container {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 100px;
+  background-color: #fff0b5;
+  color: black;
+  cursor: pointer;
 }
