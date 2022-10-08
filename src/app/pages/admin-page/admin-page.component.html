@@ -1,7 +1,17 @@
 <div id="admin-page">
   <div id="admin-page-container">
     <div class="box" *ngFor="let challenge of challenges | async">
-      <p>{{ challenge.challengeName }}</p>
+      <h1>{{ challenge.challengeName }}</h1>
+      <p id="dev-stack">{{ challenge.devStack }}</p>
+      <p>{{ challenge.timeToComplete }}</p>
+      <a *ngIf="challenge.gitHubURL" href="{{ challenge.gitHubURL }}"
+        >GitHub.com</a
+      >
+      <p>{{ challenge.summary }}</p>
+      <div class="author">
+        <p>DisplayName: {{ challenge.submitedBy.username }}</p>
+        <p>uid: {{ challenge.submitedBy.uid }}</p>
+      </div>
     </div>
   </div>
 </div>

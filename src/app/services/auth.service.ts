@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
-import { getAuth, signOut } from '@angular/fire/auth';
+import { getAuth, onAuthStateChanged, signOut } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import * as auth from 'firebase/auth';
+import { Observable } from 'rxjs';
 import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  user$!: Observable<User | undefined>;
+
   constructor(
     private fireAuth: AngularFireAuth,
     private router: Router,
     private afs: AngularFirestore
-  ) {}
+  ) {
+    onAuthStateChanged(getAuth(), (user) => {
+      if (user) {
+        if (this.getUser(user.uid)) {
+          this.user$ = this.getUser(user.uid);
+        }
+      }
+    });
+  }
 
   GitHubAuth() {
     return this.logIn(new auth.GithubAuthProvider());

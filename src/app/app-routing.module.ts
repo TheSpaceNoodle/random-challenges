@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './services/admin.guard';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       import('./pages/admin-page/admin-page.module').then(
         (m) => m.AdminPageModule
       ),
+    canActivate: [AdminGuard],
   },
   {
     path: '**',

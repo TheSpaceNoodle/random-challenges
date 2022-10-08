@@ -1,3 +1,7 @@
+export interface Submitter {
+  username: string;
+  uid: string;
+}
 export interface Challenge {
   challengeName: string;
   devStack: string;
@@ -5,5 +9,5 @@ export interface Challenge {
   gitHubURL: string;
   summary: string;
   approved: boolean;
-  submitedBy: string;
+  submitedBy: Submitter;
 }

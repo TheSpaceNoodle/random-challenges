@@ -11,6 +11,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class SubmitChallengePageComponent implements OnInit {
   noUser = true;
   uid = '';
+  username = '';
   valid = false;
   err: any;
   submited = false;
@@ -45,7 +46,10 @@ export class SubmitChallengePageComponent implements OnInit {
       gitHubURL: this.challengeGroup.value.gitHub || '',
       summary: this.challengeGroup.value.summary || '',
       approved: false,
-      submitedBy: this.uid,
+      submitedBy: {
+        uid: this.uid,
+        username: this.username,
+      },
     };
 
     try {
@@ -65,6 +69,7 @@ export class SubmitChallengePageComponent implements OnInit {
     if (getAuth().currentUser) {
       this.noUser = false;
       this.uid = getAuth().currentUser?.uid || '';
+      this.username = getAuth().currentUser?.displayName || '';
     } else {
       this.noUser = true;
     }
