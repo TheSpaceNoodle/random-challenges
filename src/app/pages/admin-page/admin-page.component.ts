@@ -16,7 +16,6 @@ export class AdminPageComponent implements OnInit {
   }
 
   approveChallenge(id: string) {
-    console.log(id);
     if (id) {
       this.firestoreService.approveChallenge(id);
     }

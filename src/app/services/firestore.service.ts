@@ -8,7 +8,7 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Challenge } from 'src/app/models';
 
 @Injectable({
@@ -42,6 +42,7 @@ export class FirestoreService {
     this.afs
       .doc<Challenge>(`notApprovedChallenges/${id}`)
       .valueChanges()
+      .pipe(take(1))
       .subscribe((data) => {
         if (data) {
           this.afs.doc<Challenge>(`approvedChallenges/${id}`).set(data);

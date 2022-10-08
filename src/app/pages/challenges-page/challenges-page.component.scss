@@ -1,0 +1,26 @@
+#challenges {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  #challenges-container {
+    margin-top: 120px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: flex-start;
+  }
+
+  button {
+    margin: auto;
+    width: 330px;
+    height: 75px;
+    font-size: 32px;
+    border: none;
+    border-radius: 15px;
+    background-color: #ec97c0;
+    color: #2c363f;
+  }
+}

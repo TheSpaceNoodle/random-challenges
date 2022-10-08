@@ -1,1 +1,11 @@
-<p>challenges-page works!</p>
+<div id="challenges">
+  <div id="challenges-container">
+    <app-card
+      *ngFor="let challenge of challenges"
+      [challenge]="challenge"
+    ></app-card>
+  </div>
+  <button (click)="generateChallenges()" *ngIf="totalLength > 6">
+    Get New
+  </button>
+</div>

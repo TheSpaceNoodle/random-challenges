@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { authState, getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { take } from 'rxjs';
 import { User } from './models/user.model';
 import { AuthService } from './services/auth.service';
