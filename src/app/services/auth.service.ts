@@ -55,12 +55,13 @@ export class AuthService {
       userName: user.displayName,
       photo: user.photoURL,
       registrationDate: user.metadata.creationTime,
-      roles: {},
+      roles: user.roles,
+      acceptedChallenges: user.acceptedChallenges,
     };
-    this.afs.doc(`user/${user.uid}`).set(userData);
+    this.afs.doc(`users/${user.uid}`).set(userData);
   }
 
   getUser(uid: string) {
-    return this.afs.doc<User>(`user/${uid}`).valueChanges();
+    return this.afs.doc<User>(`users/${uid}`).valueChanges();
   }
 }

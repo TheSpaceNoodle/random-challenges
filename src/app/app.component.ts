@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
     photo: '',
     registrationDate: '',
     roles: {},
+    acceptedChallenges: [],
   };
 
   constructor(private readonly authService: AuthService) {}

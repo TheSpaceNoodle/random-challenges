@@ -9,4 +9,5 @@ export interface User {
   photo: string;
   registrationDate: string;
   roles: Roles;
+  acceptedChallenges: string[];
 }

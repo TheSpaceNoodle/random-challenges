@@ -11,9 +11,19 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: flex-start;
+
+    button {
+      border: none;
+      border-radius: 10px;
+      height: 30px;
+      padding: 5px 10px;
+      background-color: #fff0b5;
+      color: black;
+      cursor: pointer;
+    }
   }
 
-  button {
+  #get-new {
     margin: auto;
     width: 330px;
     height: 75px;
@@ -22,5 +32,6 @@
     border-radius: 15px;
     background-color: #ec97c0;
     color: #2c363f;
+    cursor: pointer;
   }
 }

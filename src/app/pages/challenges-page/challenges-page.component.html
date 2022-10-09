@@ -1,11 +1,14 @@
 <div id="challenges">
   <div id="challenges-container">
-    <app-card
-      *ngFor="let challenge of challenges"
-      [challenge]="challenge"
-    ></app-card>
+    <app-card *ngFor="let challenge of challenges" [challenge]="challenge">
+      <button (click)="acceptChallenge(challenge.id)">Accept Challenge</button>
+    </app-card>
   </div>
-  <button (click)="generateChallenges()" *ngIf="totalLength > 6">
+  <button
+    id="get-new"
+    (click)="generateChallenges()"
+    *ngIf="unsortChallenges && unsortChallenges.length > 6"
+  >
     Get New
   </button>
 </div>

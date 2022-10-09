@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Challenge } from 'src/app/models';
+import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
@@ -10,38 +11,63 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class ChallengesPageComponent implements OnInit {
   challenges!: Challenge[];
-  totalLength!: number;
+  unsortChallenges$!: Observable<Challenge[]>;
+  unsortChallenges!: Challenge[];
+  userChallenges: string[] = [];
 
-  constructor(private readonly firestoreService: FirestoreService) {
-    this.generateChallenges();
+  constructor(
+    private readonly firestoreService: FirestoreService,
+    private readonly auth: AuthService
+  ) {
+    auth.user$.pipe(take(1)).subscribe((user) => {
+      if (user) {
+        this.userChallenges = user.acceptedChallenges;
+      }
+    });
+    this.unsortChallenges$ = this.firestoreService.getApprovedChallenges();
   }
 
   generateChallenges() {
     this.challenges = [];
-    this.firestoreService
-      .getApprovedChallenges()
-      .pipe(take(1))
-      .subscribe((data) => {
-        this.totalLength = data.length;
-        if (data.length > 6) {
-          let indexList: number[] = [];
-          console.log(indexList);
-          let i = 0;
-          while (i < 6) {
-            const num = Math.floor(Math.random() * data.length);
-            if (!indexList.includes(num)) {
-              indexList.push(num);
-              i++;
-            }
+    this.unsortChallenges$.subscribe((data) => {
+      this.unsortChallenges = data;
+
+      if (this.userChallenges) {
+        this.userChallenges.forEach((el) => {
+          let index = this.unsortChallenges.findIndex((e) => e.id == el);
+          console.log(index);
+          if (index > -1) {
+            this.unsortChallenges.splice(index, 1);
           }
-          indexList.forEach((index) => {
-            this.challenges.push(data[index]);
-          });
-        } else {
-          this.challenges = data;
+        });
+      }
+
+      if (this.unsortChallenges.length > 6) {
+        let indexList: number[] = [];
+        let i = 0;
+        while (i < 6) {
+          const num = Math.floor(Math.random() * this.unsortChallenges.length);
+          if (!indexList.includes(num)) {
+            indexList.push(num);
+            i++;
+          }
         }
-      });
+        indexList.forEach((index) => {
+          this.challenges.push(this.unsortChallenges[index]);
+        });
+      } else {
+        this.challenges = this.unsortChallenges;
+      }
+    });
   }
 
-  ngOnInit(): void {}
+  acceptChallenge(id: string) {
+    this.firestoreService.acceptChallenge(id);
+    this.userChallenges.push(id);
+    this.generateChallenges();
+  }
+
+  ngOnInit(): void {
+    this.generateChallenges();
+  }
 }

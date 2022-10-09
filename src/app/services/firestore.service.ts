@@ -1,30 +1,35 @@
 import { Injectable } from '@angular/core';
+import { getAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   addDoc,
+  collection,
   collectionData,
   doc,
   Firestore,
   setDoc,
 } from '@angular/fire/firestore';
-import { collection } from '@firebase/firestore';
 import { Observable, take } from 'rxjs';
-import { Challenge } from 'src/app/models';
+import { Challenge, User } from 'src/app/models';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
+  user!: User;
+
   approvedRef = collection(this.firestore, 'approvedChallenges');
   notApprovedRef = collection(this.firestore, 'notApprovedChallenges');
 
   constructor(
     private readonly firestore: Firestore,
-    private readonly afs: AngularFirestore
+    private readonly afs: AngularFirestore,
+    private readonly auth: AuthService
   ) {}
 
   getApprovedChallenges() {
-    return collectionData(this.approvedRef) as Observable<Challenge[]>;
+    return this.afs.collection<Challenge>('approvedChallenges').valueChanges();
   }
 
   getNotApprovedChallenges() {
@@ -49,5 +54,25 @@ export class FirestoreService {
           this.afs.doc<Challenge>(`notApprovedChallenges/${id}`).delete();
         }
       });
+  }
+
+  acceptChallenge(id: string) {
+    const uid = getAuth().currentUser?.uid;
+
+    if (uid) {
+      this.auth
+        .getUser(uid)
+        .pipe(take(1))
+        .subscribe((data) => {
+          if (data) {
+            this.user = data;
+            if (!this.user.acceptedChallenges.includes(id)) {
+              this.user.acceptedChallenges.push(id);
+              this.afs.doc<User>(`users/${uid}`).set(this.user);
+              console.log('here');
+            }
+          }
+        });
+    }
   }
 }
