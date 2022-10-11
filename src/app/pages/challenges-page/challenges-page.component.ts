@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { Challenge } from 'src/app/models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,7 +9,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   templateUrl: './challenges-page.component.html',
   styleUrls: ['./challenges-page.component.scss'],
 })
-export class ChallengesPageComponent implements OnInit {
+export class ChallengesPageComponent implements OnInit, OnDestroy {
   challenges!: Challenge[];
   unsortChallenges$!: Observable<Challenge[]>;
   unsortChallenges!: Challenge[];
@@ -21,7 +21,9 @@ export class ChallengesPageComponent implements OnInit {
   ) {
     auth.user$.pipe(take(1)).subscribe((user) => {
       if (user) {
-        this.userChallenges = user.acceptedChallenges;
+        this.userChallenges = user.acceptedChallenges.concat(
+          user.completedChallenges
+        );
       }
     });
     this.unsortChallenges$ = this.firestoreService.getApprovedChallenges();
@@ -35,7 +37,6 @@ export class ChallengesPageComponent implements OnInit {
       if (this.userChallenges) {
         this.userChallenges.forEach((el) => {
           let index = this.unsortChallenges.findIndex((e) => e.id == el);
-          console.log(index);
           if (index > -1) {
             this.unsortChallenges.splice(index, 1);
           }
@@ -69,5 +70,9 @@ export class ChallengesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateChallenges();
+  }
+
+  ngOnDestroy(): void {
+    this.challenges = [];
   }
 }

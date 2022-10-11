@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     registrationDate: '',
     roles: {},
     acceptedChallenges: [],
+    completedChallenges: [],
   };
 
   constructor(private readonly authService: AuthService) {}

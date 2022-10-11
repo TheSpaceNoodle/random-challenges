@@ -75,4 +75,32 @@ export class FirestoreService {
         });
     }
   }
+
+  markAsCompleted(id: string) {
+    const uid = getAuth().currentUser?.uid;
+
+    if (uid) {
+      this.auth
+        .getUser(uid)
+        .pipe(take(1))
+        .subscribe((data) => {
+          if (data) {
+            this.user = data;
+            if (this.user.acceptedChallenges.includes(id)) {
+              this.user.acceptedChallenges.splice(
+                this.user.acceptedChallenges.indexOf(id),
+                1
+              );
+              this.user.completedChallenges.push(id);
+              this.afs.doc<User>(`users/${uid}`).set(this.user);
+              console.log('here2');
+            }
+          }
+        });
+    }
+  }
+
+  getChallenge(id: string) {
+    return this.afs.doc<Challenge>(`approvedChallenges/${id}`).valueChanges();
+  }
 }

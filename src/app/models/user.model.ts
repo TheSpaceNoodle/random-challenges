@@ -10,4 +10,5 @@ export interface User {
   registrationDate: string;
   roles: Roles;
   acceptedChallenges: string[];
+  completedChallenges: string[];
 }

@@ -1,1 +1,56 @@
-<p>profile-page works!</p>
+<div id="profile-container">
+  <div id="profile">
+    <div id="profile-card-container">
+      <div id="profile-card">
+        <img src="{{ user.photo }}" alt="" />
+        <h3 id="display-name">{{ user.userName }}</h3>
+        <div class="stats">
+          <p id="total-challenges">
+            Total challenges:
+            <span class="number">
+              {{
+                user.completedChallenges.length + user.acceptedChallenges.length
+              }}
+            </span>
+          </p>
+          <p id="active-challenges">
+            Active challenges:
+            <span class="number">{{ user.acceptedChallenges.length }}</span>
+          </p>
+          <p id="completed-challenges">
+            Finished challenges:
+            <span class="number">{{ user.completedChallenges.length }}</span>
+          </p>
+          <p id="registration-date">
+            Registration date:
+            <span class="highlight">{{ user.registrationDate }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="challenges">
+      <div id="active" *ngIf="activeChallenges.length">
+        <p>Active challenges:</p>
+        <div class="cards-container">
+          <app-card
+            *ngFor="let challenge of activeChallenges"
+            [challenge]="challenge"
+          >
+            <button (click)="markAsCompleted(challenge.id)">
+              Mark as Completed
+            </button>
+          </app-card>
+        </div>
+      </div>
+      <div id="completed" *ngIf="finishedChallenges.length">
+        <p>Finished challenges:</p>
+        <div class="cards-container">
+          <app-card
+            *ngFor="let challenge of finishedChallenges"
+            [challenge]="challenge"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

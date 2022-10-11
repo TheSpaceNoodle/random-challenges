@@ -60,7 +60,7 @@ export class SubmitChallengePageComponent implements OnInit {
       setTimeout(() => {
         this.submited = false;
       }, 2000);
-      // this.challengeGroup.reset();
+      this.challengeGroup.reset();
     }
   }
 

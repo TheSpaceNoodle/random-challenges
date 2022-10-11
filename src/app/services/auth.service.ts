@@ -57,6 +57,7 @@ export class AuthService {
       registrationDate: user.metadata.creationTime,
       roles: user.roles,
       acceptedChallenges: user.acceptedChallenges,
+      finishedChallenges: user.finishedChallenges,
     };
     this.afs.doc(`users/${user.uid}`).set(userData);
   }
