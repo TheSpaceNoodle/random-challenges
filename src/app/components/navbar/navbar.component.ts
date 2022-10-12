@@ -1,5 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,9 @@ export class NavbarComponent implements OnInit {
   @Input() user!: User;
   scrolled = 0;
   prevScrolled = 0;
+  showNav = false;
+
+  constructor(private readonly authService: AuthService) {}
 
   @HostListener('window:scroll', ['$event.path[1].scrollY'])
   handleScroll(scrollY: any) {
@@ -24,7 +28,13 @@ export class NavbarComponent implements OnInit {
     this.prevScrolled = scrollY || 0;
   }
 
-  constructor() {}
+  toggleNav() {
+    this.showNav = !this.showNav;
+  }
+
+  logOut() {
+    this.authService.logOut();
+  }
 
   ngOnInit(): void {}
 }

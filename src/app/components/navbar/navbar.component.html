@@ -16,13 +16,40 @@
       <li>
         <a routerLink="submit-challenge">Submit Challenge</a>
       </li>
-      <li>
+      <!-- <li>
         <a routerLink="learn">Learning</a>
-      </li>
+      </li> -->
     </ul>
     <app-login-button *ngIf="noUser">Login with</app-login-button>
     <app-profile-button [photoUrl]="user.photo || ''" *ngIf="!noUser"
       ><a routerLink="profile">Profile</a></app-profile-button
     >
+  </div>
+</div>
+
+<div id="mobile-nav">
+  <div id="mobile-nav-container"></div>
+  <div class="burger-container" (click)="toggleNav()">
+    <div id="burger">
+      <div class="bar top-bar"></div>
+      <div class="bar mid-bar"></div>
+      <div class="bar btm-bar"></div>
+    </div>
+  </div>
+  <div id="mobile-nav-links" [ngClass]="showNav ? 'showNav' : ''">
+    <ul>
+      <li>
+        <a routerLink="challenges">Challenges</a>
+      </li>
+      <li>
+        <a routerLink="submit-challenge">Submit Challenge</a>
+      </li>
+      <li><a *ngIf="!noUser" routerLink="profile">Profile</a></li>
+      <li *ngIf="!noUser" (click)="logOut()">LogOut</li>
+      <!-- <li>
+        <a routerLink="learn">Learning</a>
+      </li> -->
+    </ul>
+    <app-login-button *ngIf="noUser">Login with</app-login-button>
   </div>
 </div>

@@ -94,6 +94,7 @@ footer {
     }
 
     .spinnin {
+      margin-bottom: 100px;
       font-size: 40px;
       font-weight: 500;
       text-decoration: none;
@@ -192,4 +193,85 @@ footer {
   animation-delay: 0.85s;
   animation-duration: 0.5s;
   opacity: 1;
+}
+
+@media (max-width: 800px) {
+  header {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .text,
+  p {
+    padding: 0 10px;
+  }
+
+  img {
+    display: none;
+  }
+
+  .divider-line-one,
+  .divider-line-two {
+    display: none;
+  }
+
+  #divider {
+    h1 {
+      font-size: 32px;
+    }
+    margin: auto;
+    width: 100vw;
+    justify-content: center;
+  }
+
+  section,
+  #purpose-section {
+    width: 100vw;
+  }
+
+  footer {
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  #contact-me {
+    flex-wrap: wrap;
+
+    .spinnin {
+      margin-top: 100px;
+    }
+  }
+}
+
+@media (max-width: 1099px) {
+  header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  img {
+    display: none;
+  }
+
+  section,
+  #purpose-section {
+    width: 100vw;
+  }
+
+  #divider {
+    h1 {
+      font-size: 32px;
+    }
+    width: 100vw;
+    .divider-line-one,
+    .divider-line-two {
+      width: 200px;
+    }
+  }
+
+  .text,
+  p {
+    padding: 0 10px;
+  }
 }

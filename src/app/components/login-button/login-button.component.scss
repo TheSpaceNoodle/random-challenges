@@ -15,3 +15,10 @@ button {
   width: 410px;
   font-size: 26px;
 }
+
+@media (max-width: 800px) {
+  .page {
+    width: 350px;
+    z-index: -1;
+  }
+}
