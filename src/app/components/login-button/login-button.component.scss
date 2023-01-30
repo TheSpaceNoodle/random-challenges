@@ -9,6 +9,12 @@
 }
 button {
   filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.4));
+
+  .mat-flat-button .mdc-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 }
 
 .page {

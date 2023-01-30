@@ -4,12 +4,11 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   addDoc,
   collection,
-  collectionData,
   doc,
   Firestore,
   setDoc,
 } from '@angular/fire/firestore';
-import { Observable, take } from 'rxjs';
+import { take } from 'rxjs';
 import { Challenge, User } from 'src/app/models';
 import { AuthService } from './auth.service';
 
@@ -33,7 +32,9 @@ export class FirestoreService {
   }
 
   getNotApprovedChallenges() {
-    return collectionData(this.notApprovedRef) as Observable<Challenge[]>;
+    return this.afs
+      .collection<Challenge>('notApprovedChallenges')
+      .valueChanges();
   }
 
   submitChallenge(data: Challenge) {
@@ -60,19 +61,15 @@ export class FirestoreService {
     const uid = getAuth().currentUser?.uid;
 
     if (uid) {
-      this.auth
-        .getUser(uid)
-        .pipe(take(1))
-        .subscribe((data) => {
-          if (data) {
-            this.user = data;
-            if (!this.user.acceptedChallenges.includes(id)) {
-              this.user.acceptedChallenges.push(id);
-              this.afs.doc<User>(`users/${uid}`).set(this.user);
-              console.log('here');
-            }
+      this.auth.user$.pipe(take(1)).subscribe((data) => {
+        if (data) {
+          this.user = data;
+          if (!this.user.acceptedChallenges.includes(id)) {
+            this.user.acceptedChallenges.push(id);
+            this.afs.doc<User>(`users/${uid}`).set(this.user);
           }
-        });
+        }
+      });
     }
   }
 
@@ -80,23 +77,19 @@ export class FirestoreService {
     const uid = getAuth().currentUser?.uid;
 
     if (uid) {
-      this.auth
-        .getUser(uid)
-        .pipe(take(1))
-        .subscribe((data) => {
-          if (data) {
-            this.user = data;
-            if (this.user.acceptedChallenges.includes(id)) {
-              this.user.acceptedChallenges.splice(
-                this.user.acceptedChallenges.indexOf(id),
-                1
-              );
-              this.user.completedChallenges.push(id);
-              this.afs.doc<User>(`users/${uid}`).set(this.user);
-              console.log('here2');
-            }
+      this.auth.user$.pipe(take(1)).subscribe((data) => {
+        if (data) {
+          this.user = data;
+          if (this.user.acceptedChallenges.includes(id)) {
+            this.user.acceptedChallenges.splice(
+              this.user.acceptedChallenges.indexOf(id),
+              1
+            );
+            this.user.completedChallenges.push(id);
+            this.afs.doc<User>(`users/${uid}`).set(this.user);
           }
-        });
+        }
+      });
     }
   }
 

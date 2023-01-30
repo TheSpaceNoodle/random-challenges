@@ -1,4 +1,4 @@
-<div id="profile-container">
+<div id="profile-container" *ngIf="user$ | async as user">
   <div id="profile">
     <div id="profile-card-container">
       <div id="profile-card">
@@ -29,26 +29,31 @@
       </div>
     </div>
     <div id="challenges">
-      <div id="active" *ngIf="activeChallenges.length">
+      <div id="active" *ngIf="activeChallenges$">
         <p>Active challenges:</p>
         <div class="cards-container">
-          <app-card
-            *ngFor="let challenge of activeChallenges"
-            [challenge]="challenge"
-          >
-            <button (click)="markAsCompleted(challenge.id)">
-              Mark as Completed
-            </button>
-          </app-card>
+          <ng-container *ngFor="let challenge$ of activeChallenges$">
+            <app-card
+              *ngIf="challenge$ | async as challenge"
+              [challenge]="challenge"
+            >
+              <button (click)="markAsCompleted(challenge.id)">
+                Mark as Completed
+              </button>
+            </app-card>
+          </ng-container>
         </div>
       </div>
-      <div id="completed" *ngIf="finishedChallenges.length">
+      <div id="completed" *ngIf="finishedChallenges$">
         <p>Finished challenges:</p>
         <div class="cards-container">
-          <app-card
-            *ngFor="let challenge of finishedChallenges"
-            [challenge]="challenge"
-          ></app-card>
+          <ng-container *ngFor="let challenge$ of finishedChallenges$">
+            <app-card
+              *ngIf="challenge$ | async as challenge"
+              [challenge]="challenge"
+            >
+            </app-card>
+          </ng-container>
         </div>
       </div>
     </div>

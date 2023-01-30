@@ -1,4 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,11 +9,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  @Input() noUser!: boolean;
-  @Input() user!: User;
   scrolled = 0;
   prevScrolled = 0;
   showNav = false;
+  user$: Observable<User | undefined> = this.authService.user$;
 
   constructor(private readonly authService: AuthService) {}
 

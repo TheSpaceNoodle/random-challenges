@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { Challenge, User } from 'src/app/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -10,60 +10,57 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
-  user: User = {
-    uid: '',
-    email: '',
-    userName: '',
-    photo: '',
-    registrationDate: '',
-    roles: {},
-    acceptedChallenges: [],
-    completedChallenges: [],
-  };
-  activeChallenges: Challenge[] = [];
-  finishedChallenges: Challenge[] = [];
+  user$: Observable<User | undefined> = this.authService.user$;
+  activeChallenges$: Observable<Challenge | undefined>[] = [];
+  finishedChallenges$: Observable<Challenge | undefined>[] = [];
 
   constructor(
-    private readonly auth: AuthService,
+    private readonly authService: AuthService,
     private readonly firestoreService: FirestoreService
-  ) {
-    this.auth.user$.subscribe((userData) => {
-      if (userData) {
-        this.user = userData;
-        this.getUserChallenges();
-      }
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.getUserChallenges();
   }
 
-  getUserChallenges() {
-    this.activeChallenges = [];
-    this.finishedChallenges = [];
+  ngOnDestroy(): void {}
 
-    this.user.acceptedChallenges.forEach((id) => {
-      this.firestoreService
-        .getChallenge(id)
-        .pipe(take(1))
-        .subscribe((data) => {
-          if (data) this.activeChallenges.push(data);
-        });
-    });
-    this.user.completedChallenges.forEach((id) => {
-      this.firestoreService
-        .getChallenge(id)
-        .pipe(take(1))
-        .subscribe((data) => {
-          console.log('foreach');
-          if (data) this.finishedChallenges.push(data);
-        });
-    });
+  getUserChallenges() {
+    this.finishedChallenges$ = [];
+    this.activeChallenges$ = [];
+
+    this.getActiveChallenges();
+    this.getCompletedChallenges();
+  }
+
+  getActiveChallenges() {
+    return this.user$.pipe(
+      map((user) => {
+        if (user) {
+          user.acceptedChallenges.forEach((id) =>
+            this.activeChallenges$.push(this.firestoreService.getChallenge(id))
+          );
+        }
+      }),
+      take(1)
+    );
+  }
+
+  getCompletedChallenges() {
+    return this.user$.pipe(
+      map((user) => {
+        if (user) {
+          user.completedChallenges.forEach((id) =>
+            this.activeChallenges$.push(this.firestoreService.getChallenge(id))
+          );
+        }
+      }),
+      take(1)
+    );
   }
 
   markAsCompleted(id: string) {
     this.firestoreService.markAsCompleted(id);
     this.getUserChallenges();
   }
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
 }
